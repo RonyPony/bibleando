@@ -1,0 +1,19 @@
+<div class="mainContainer">
+<b>Buscar cita</b>
+<br>
+Libro
+<select (change)="selectBook($event)">
+  <option value="{{item['id']}}" *ngFor="let item of libros?.data">{{item['name']}}</option>
+</select>
+
+Capitulo
+<select (change)="selectChar($event)">
+  <option value="{{item.id}}" *ngFor="let item of capitulos?.data">{{item.number}}</option>
+</select>
+
+Versiculo
+<select (change)="selectVerse($event)">
+  <option value="{{item.id}}" *ngFor="let item of versiculos?.data">{{item.id.split(".",3)[2]}}</option>
+</select>
+<button (click)="refresh()" [disabled]="!canSearch" >Buscar</button>
+</div>
