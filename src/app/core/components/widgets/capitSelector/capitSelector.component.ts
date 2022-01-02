@@ -33,10 +33,11 @@ export class CapitSelectorComponent implements OnInit {
 
   }
 
-  selectBook(x:Event){
+  selectBook(x: Event) {
     this.currentSelectedBook = (x.target as HTMLInputElement).value
     console.log("Selected Book: "+this.currentSelectedBook);
     localStorage.setItem("currentSelectedBook", this.currentSelectedBook);
+    localStorage.setItem("searchType", "SingleVerse");
     this.loadCharacters()
   }
 

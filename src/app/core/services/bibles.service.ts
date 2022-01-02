@@ -13,7 +13,7 @@ import {Bibles, DataEntity} from '../../models/bibles'
 export class BiblesService {
 
 constructor(private http:HttpClient) { }
-  SelectedbookName: String='';
+  SelectedbookName: String = '';
 
 async getAllBibles() : Promise<Observable<Bibles>>{
   console.log("Getting all Bibles");
@@ -37,6 +37,14 @@ getPassages(){
   return x;
 }
 
+  getLongPassage() {
+    var bversion = this.getSelectedVersion();
+    var origin = this.getSelectedOriginVerse();
+    var destinity = this.getSelectedDestinityVerse();
+    var x= this.http.get<Passages>(`https://api.scripture.api.bible/v1/bibles/${bversion}/passages/${origin}-${destinity}?content-type=html&include-notes=false&include-titles=true&include-chapter-numbers=true&include-verse-numbers=true&include-verse-spans=true&use-org-id=false`,{headers:new HttpHeaders().set('api-key','038c15a4ade850b0a35d07f28fe5587f')});
+    return x;
+  }
+
 getSelectedBook() {
   var bk = localStorage.getItem("currentSelectedBook") || '';
   return bk;
@@ -46,6 +54,19 @@ getSelectedChar() {
 }
 getSelectedVerse() {
   return localStorage.getItem("currentSelectedVerse") || '';
+}
+
+getSelectedOriginVerse() {
+  return localStorage.getItem("currentSelectedOriginVerse") || '';
+}
+getSelectedOriginChar() {
+  return localStorage.getItem("currentSelectedOriginChar") || '';
+}
+getSelectedDestinityVerse() {
+  return localStorage.getItem("currentSelectedDestinityVerse") || '';
+}
+getSelectedDestinityChar() {
+  return localStorage.getItem("currentSelectedDestinityChar") || '';
 }
 
 async getBibleByid(id: string):Promise<Observable<Bibles>> {

@@ -1,3 +1,4 @@
+
 <small *ngIf="currentSelectedVersionName!='' ">
   <b>Version Seleccionada</b> {{currentSelectedVersionName}}
   |
@@ -6,6 +7,7 @@
 <div class="mainContainer">
 Selecciona una version
 <select class="selector" (change)="onChange($event)">
+  <option>{{currentSelectedVersionName}}</option>
   <option value="{{item.id}}" *ngFor="let item of kk?.data">
     {{item.name}}
   </option>

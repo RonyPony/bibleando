@@ -7,33 +7,59 @@ import { BiblesService } from 'src/app/core/services/bibles.service';
   styleUrls: ['./reader.component.scss']
 })
 export class ReaderComponent implements OnInit {
+  showVerseAndChap: boolean = false;
   currentSelectedBook: string = '';
   currentSelectedChar: string = '';
+  currentSelectedOriginChar: string = '';
   currentSelectedVerse: string = '';
+  currentSelectedOriginVerse: string = '';
   currentSelectedVersion: string = '';
+  currenSelectedDestinityChar: string = '';
+  currenSelectedDestinityVerse: string ='';
+  singleSearch: boolean = true;
   content: string = '';
   constructor(private bibleService:BiblesService) { }
 
   ngOnInit() {
-
+    this.getSearchType();
     this.getName();
     this.getChar();
     this.getVerse()
     this.getContent();
     this.currentSelectedVersion = this.bibleService.getSelectedVersion();
   }
+
+  getSearchType() {
+    this.singleSearch = localStorage.getItem("searchType")=="SingleVerse";
+  }
   getContent() {
-    this.bibleService.getPassages().subscribe(pass => {
-      this.content = pass.data.content
-    })
+    var searchType=localStorage.getItem("searchType");
+    if (searchType=="SingleVerse") {
+      console.log("Searching Single Verse")
+      this.bibleService.getPassages().subscribe(pass => {
+        this.content = pass.data.content
+      })
+    } else {
+      console.log("Searching Multiple Verse")
+      this.bibleService.getLongPassage().subscribe(pess => {
+        this.content=pess.data.content
+      })
+    }
+
+
+
   }
 
   getVerse() {
-    this.currentSelectedVerse = "V. "+this.bibleService.getSelectedVerse().split('.', 3)[2];
+    this.currenSelectedDestinityVerse = "Verso " + this.bibleService.getSelectedDestinityVerse().split('.', 3)[2];
+    this.currentSelectedOriginVerse = "Verso " + this.bibleService.getSelectedOriginVerse().split('.', 3)[2];
+    this.currentSelectedVerse = "Verso " + this.bibleService.getSelectedVerse().split('.', 3)[2];
   }
 
   getChar() {
-    this.currentSelectedChar = "C. "+this.bibleService.getSelectedChar().split('.',3)[1];
+    this.currenSelectedDestinityChar = "Capitulo " + this.bibleService.getSelectedDestinityChar().split('.', 3)[1];
+    this.currentSelectedOriginChar = "Capitulo " + this.bibleService.getSelectedOriginChar().split('.',3)[1];
+    this.currentSelectedChar = "Capitulo "+this.bibleService.getSelectedChar().split('.',3)[1];
   }
 
   getName() {

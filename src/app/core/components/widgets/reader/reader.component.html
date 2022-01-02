@@ -1,7 +1,24 @@
 <div class="mainContainer">
-{{currentSelectedBook}}
-{{currentSelectedChar}}
-{{currentSelectedVerse}}
+  <span *ngIf="content.length>2 && singleSearch">
+    {{currentSelectedBook}}
+    {{currentSelectedChar}}
+    {{currentSelectedVerse}}
+  </span>
+  <span *ngIf="!singleSearch">
+    Desde
+    <b>
+    {{currentSelectedBook}}
+    {{currentSelectedOriginChar}}
+    {{currentSelectedOriginVerse}}
+    </b>
+Hasta
+<b>
+  {{currentSelectedBook}}
+{{currenSelectedDestinityChar}}
+{{currenSelectedDestinityVerse}}
+
+</b>  </span>
+
 <!-- {{currentSelectedVersion}} -->
 <div [innerHTML]="content" class="mainContainer">
 

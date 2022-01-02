@@ -10,6 +10,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { BiblesService } from './core/services/bibles.service';
 import { CapitSelectorComponent } from './core/components/widgets/capitSelector/capitSelector.component';
 import { ReaderComponent } from './core/components/widgets/reader/reader.component';
+import { CitaSelectorComponent } from './core/components/widgets/citaSelector/citaSelector.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +18,8 @@ import { ReaderComponent } from './core/components/widgets/reader/reader.compone
     VersionSelectorComponent,
     MenuComponent,
     CapitSelectorComponent,
-    ReaderComponent
+    ReaderComponent,
+    CitaSelectorComponent
   ],
   imports: [
     BrowserModule,

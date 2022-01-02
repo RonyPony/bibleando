@@ -1,0 +1,43 @@
+<div class="mainContainer">
+  <b>Buscar Una Cita</b>
+  <br>
+  Libro
+  <select class="selector" (change)="selectBook($event)">
+    <option>Seleccione un Libro</option>
+    <option value="{{item['id']}}" *ngFor="let item of libros?.data">{{item['name']}}</option>
+  </select>
+<br>
+<br>
+<table class="tabla">
+  <th>Desde</th><th>Hasta</th>
+  <tr>
+    <td>Capitulo
+      <select class="selector" (change)="selectOriginChar($event)">
+        <option>Seleccione un Capitulo</option>
+        <option value="{{item.id}}" *ngFor="let item of capitulosOrigen?.data">{{item.number}}</option>
+      </select>
+    </td>
+    <td>Capitulo
+      <select class="selector" (change)="selectDestinityChar($event)">
+        <option>Seleccione un Capitulo</option>
+        <option value="{{item.id}}" *ngFor="let item of capitulosDestino?.data">{{item.number}}</option>
+      </select></td>
+  </tr>
+  <tr>
+    <td>Versiculo
+      <select class="selector" (change)="selectOriginVerse($event)">
+        <option>Seleccione un Verso</option>
+        <option value="{{item.id}}" *ngFor="let item of versiculosOrigen?.data">{{item.id.split(".",3)[2]}}</option>
+      </select>
+    </td>
+    <td>Versiculo
+      <select class="selector" (change)="selectDestinityVerse($event)">
+        <option>Seleccione un Verso</option>
+        <option value="{{item.id}}" *ngFor="let item of versiculosDestino?.data">{{item.id.split(".",3)[2]}}</option>
+      </select></td>
+  </tr>
+</table>
+
+
+  <button class="btn" (click)="refresh()" [disabled]="!canSearch" >Buscar</button>
+  </div>
